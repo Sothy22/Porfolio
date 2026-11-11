@@ -1,0 +1,35 @@
+import React from 'react';
+import { FaGithub, FaHeart, FaLinkedin, FaTwitter } from 'react-icons/fa';
+
+function Footer() {
+  const currentYear = new Date().getFullYear();
+  return (
+    <footer className="border-t bg-linear-to-br from-red-400 to-white dark:bg-linear-to-br dark:from-red-950 dark:to-black py-6 mb-25">
+      <div className="container mx-auto px-6 flex flex-col sm:flex-row justify-between items-center gap-4">
+        <div className="">
+          <h3 className="text-xl text-center text-red-500 font-bold dark:text-red-400">
+            Portfolio
+          </h3>
+          <p className="text-xs">Frontend Developer</p>
+        </div>
+        <div className="flex gap-4">
+          <a href="#" className="hover:text-red-500 transition-colors">
+            <FaGithub size={20} />
+          </a>
+          <a href="#" className="hover:text-red-500 transition-colors">
+            <FaLinkedin size={20} />
+          </a>
+          <a href="#" className="hover:text-red-500 transition-colors">
+            <FaTwitter size={20} />
+          </a>
+        </div>
+        <p className="text-xs flex items-center gap-1">
+          {currentYear} Made with <FaHeart className="text-red-500" /> by{' '}
+          <span className="font-medium text-red-500">Sothy</span>
+        </p>
+      </div>
+    </footer>
+  );
+}
+
+export default Footer;

@@ -1,0 +1,115 @@
+import React from 'react';
+import { useState } from 'react';
+import {
+  FaCertificate,
+  FaCode,
+  FaEnvelope,
+  FaHome,
+  FaProjectDiagram,
+  FaUser,
+} from 'react-icons/fa';
+import { motion } from 'framer-motion';
+import { Sun, Moon } from 'lucide-react';
+
+function Navbar({ darkMode, toggleDarkMode }) {
+  const [active, setActive] = useState('Home');
+
+  const navItems = [
+    {
+      name: 'Home',
+      link: '#home',
+      icon: FaHome,
+    },
+    {
+      name: 'About',
+      link: '#about',
+      icon: FaUser,
+    },
+    {
+      name: 'Skills',
+      link: '#skills',
+      icon: FaCode,
+    },
+    {
+      name: 'Certificates',
+      link: '#certificates',
+      icon: FaCertificate,
+    },
+    {
+      name: 'Projects',
+      link: '#projects',
+      icon: FaProjectDiagram,
+    },
+    {
+      name: 'Contact',
+      link: '#contact',
+      icon: FaEnvelope,
+    },
+  ];
+  return (
+    <div className="fixed inset-x-0 bottom-0 z-50 flex justify-center px-4 pb-4 ">
+      <motion.nav
+        initial={{ y: 100 }}
+        animate={{ y: 0 }}
+        transition={{ duration: 0.5 }}
+        className="relative w-[90%] max-w-4xl mb-4 bg-red-500 rounded-2xl"
+      >
+        <div className="relative bg-linear-blur-xl rounded-2xl from-red-600 to-red-800 backdrop-blur-xl rounded-2xl shadow-2xl border border-white/20 px-3 py-2">
+          <div className="absolute -top-5 right-3">
+            <motion.button
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              onClick={toggleDarkMode}
+              className="p-2 rounded-full bg-gray-900 dark:bg-gray-100 transition-colors backdrop-blur-sm"
+            >
+              {darkMode ? (
+                <Sun className="w-5 lg:w-5 h-5 lg:h-5 text-black" />
+              ) : (
+                <Moon className="w-5 lg:w-5 h-5 lg:h-5 text-white" />
+              )}
+            </motion.button>
+          </div>
+
+          <div className="flex items-center justify-around gap-1">
+            {navItems.map((item) => {
+              const Icon = item.icon;
+              const isActive = active === item.name;
+              return (
+                <motion.a
+                  key={item.name}
+                  href={item.link}
+                  onClick={() => setActive(item.name)}
+                  whileFocus={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                  className="flex flex-col items-center gap-05 py-1.5 px-2 relative group flex-1"
+                >
+                  {isActive && (
+                    <motion.div
+                      layoutId="activeTab"
+                      className="absolute -top-2 left-1/2 -translate-x-1/2 w-6 h-1 bg-white rounded-full"
+                      transition={{ duration: 0.3 }}
+                    ></motion.div>
+                  )}
+                  <Icon
+                    className={`w-5 h-5 transition-all duration-300 ${isActive ? 'text-white' : 'text-white/70 group-hover:text-white'}`}
+                  />
+                  <span
+                    className={`text-[10px] font-medium transition-all duration-300 ${
+                      isActive
+                        ? 'text-white'
+                        : 'text-white/60 group-hover:text-white'
+                    }`}
+                  >
+                    {item.name}
+                  </span>
+                </motion.a>
+              );
+            })}
+          </div>
+        </div>
+      </motion.nav>
+    </div>
+  );
+}
+
+export default Navbar;
